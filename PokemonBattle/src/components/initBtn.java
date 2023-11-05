@@ -4,7 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 
 public class initBtn extends JButton {
-    static String compRes = "./../img/";
+    public static String srcPath = "./img/";
+    static String compRes = "./." + srcPath;
     String fileName;
 
     public initBtn(Integer x, Integer y, Integer width, Integer height, String fileName) {

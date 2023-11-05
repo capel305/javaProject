@@ -1,10 +1,12 @@
 import javax.swing.*;
 
+import components.initBtn;
+
 public class myFrame extends JFrame {
     Integer frameWidth = 428;
     Integer frameHeight = 926;
-    String reSource = "./img/";
-    
+    String reSource = initBtn.srcPath;
+
     void myFrame() {
         // JFrame frame = new JFrame();
         this.setTitle("Welcome to Pokemon fight game!");

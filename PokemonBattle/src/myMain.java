@@ -17,203 +17,60 @@ public class myMain {
     ArrayList<HashMap<String, String>> firePokemonList = pokemonLogics.pokemonList().get("fire");
     ArrayList<HashMap<String, String>> naturePokemonList = pokemonLogics.pokemonList().get("nature");
     Map<String, String> userSelectPokemon = new HashMap<>();
+    String pokemonPath = src + "pokemon/";
+    // main score
     Integer userScore = 0;
     Integer computerScore = 0;
+    // round score
+    Integer userRoundStar = 0;
+    Integer computerRoundStar = 0;
+
+    // game labels
+    initLabels msgBoxSelectPokemon = new initLabels(0, 0, 428, 926, "msgBoxSelectPokemon3.png");
+
+    scoreLabel yourScore = new scoreLabel(150, 525, 180, 100, "Score: " + userScore);
+    initLabels selectPokemon = new initLabels(150, 360, 95, 85, "selectPokemon.png");
+    initLabels enemyPokemon = new initLabels(150, 180, 95, 85, "enemyPokemon.png");
+    scoreLabel enemyScore = new scoreLabel(150, 0, 180, 100, "Score: " + computerScore);
+    initLabels enemyLabel = new initLabels(110, 70, 180, 53, "enemyLabel.png");
+    scoreLabel vsLabel = new scoreLabel(180, 260, 180, 100, "VS");
+    initLabels youLabel = new initLabels(110, 460, 180, 53, "youLabel.png");
+    initLabels enemyStarRound = new initLabels(138, 130, 128, 32, computerRoundStar + "star.png");
+    initLabels yourStarRound = new initLabels(138, 520, 128, 32, userRoundStar + "star.png");
+
+    // game button
+    // selecting pokemon section
+    initBtn backBtn = new initBtn(15, 15, 54, 52, "backBtn.png");
+    attkBtn attkBtn = new attkBtn();
+    initBtn continueBtn = new initBtn(110, 430, 204, 70, "continueBtn.png");
+    pokemonBtn waterPokemon = new pokemonBtn(waterPokemonList.get(0).get("fileName"), 50, 700,
+            waterPokemonList.get(0).get("type"), 0, waterPokemonList.get(0).get("name"));
+    pokemonBtn firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName"), 160, 700,
+            firePokemonList.get(0).get("type"), 0,
+            firePokemonList.get(0).get("name"));
+    pokemonBtn naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName"), 270, 700,
+            naturePokemonList.get(0).get("type"), 0, naturePokemonList.get(0).get("name"));
 
     myMain() {
         firstFrame();
+        btnEvents();
     }
 
-    void thirdFrame() {
-        // clearing existing content
-        clearFrame();
-        // main content
-        ImageIcon mainBg = new ImageIcon();
-        JLabel mainContent = new JLabel(mainBg);
-        mainContent.setSize(myFrame.frameWidth, myFrame.frameHeight);
-        mainContent.setOpaque(true);
-        mainContent.setBackground(new Color(0, 0, 0));
+    void firstFrame() {
+        initLabels mainContent = new initLabels(0, 0, myFrame.frameWidth, myFrame.frameHeight, "loadingBg.jpg");
 
-        // custom msgbox
-        initLabels msgBoxSelectPokemon = new initLabels(0, 0, 428, 926, "msgBoxSelectPokemon3.png");
-        initBtn continueBtn = new initBtn(110, 430, 204, 70, "continueBtn.png");
+        myFrame.myFrame();
 
-        msgBoxSelectPokemon.setVisible(false);
-        // btns
-        initBtn backBtn = new initBtn(15, 15, 54, 52, "backBtn.png");
-        backBtn.addActionListener(new ActionListener() {
+        initBtn initBtn = new initBtn(130, 650, 160, 52, "startGameBtn.png");
+        initBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 secondFrame();
             }
         });
 
-        // enemy
-        // enemyscore
-        scoreLabel enemyScore = new scoreLabel(150, 20, 180, 100, "Score: 0");
-        initLabels enemyLabel = new initLabels(110, 100, 180, 53, "enemyLabel.png");
-        initLabels enemyPokemon = new initLabels(150, 180, 95, 85, "enemyPokemon.png");
-
-        scoreLabel vsLabel = new scoreLabel(180, 260, 180, 100, "VS");
-
-        // your pokemon
-        initLabels selectPokemon = new initLabels(150, 360, 95, 85, "selectPokemon.png");
-        initLabels youLabel = new initLabels(110, 460, 180, 53, "youLabel.png");
-        scoreLabel yourScore = new scoreLabel(150, 490, 180, 100, "Score: 0");
-
-        // selecting pokemon section
-        String pokemonPath = "img/pokemon/";
-        attkBtn attkBtn = new attkBtn();
-
-        pokemonBtn waterPokemon = new pokemonBtn(waterPokemonList.get(0).get("fileName"), 50, 700,
-                waterPokemonList.get(0).get("type"), 0, waterPokemonList.get(0).get("name"));
-        pokemonBtn firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName"), 160, 700,
-                firePokemonList.get(0).get("type"), 0,
-                firePokemonList.get(0).get("name"));
-        pokemonBtn naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName"), 270, 700,
-                naturePokemonList.get(0).get("type"), 0, naturePokemonList.get(0).get("name"));
-
-        attkBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String computerPokemon = pokemonLogics.pokemonLogics().get(pokemonLogics.randomNumber(3)).get("type");
-                int intFight = pokemonLogics.pokemonFighting(userSelectPokemon.get("type"), computerPokemon);
-
-                HashMap<String, String> computerPokemonHashMap = pokemonLogics.computerPick(computerPokemon);
-                enemyPokemon.setIcon(new ImageIcon(
-                        this.getClass().getResource(pokemonPath + computerPokemonHashMap.get("fileName"))));
-
-                if (intFight == 0) {
-                    computerScore = computerScore + 1;
-                    System.out.println("you Lose!");
-                    msgBoxSelectPokemon.setVisible(true);
-                    msgBoxSelectPokemon
-                            .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxYouLose.png")));
-
-                    backBtn.setEnabled(false);
-                    attkBtn.setEnabled(false);
-                    waterPokemon.setEnabled(false);
-                    firePokemon.setEnabled(false);
-                    naturePokemon.setEnabled(false);
-
-                } else if (intFight == 1) {
-                    userScore = userScore + 1;
-
-                    msgBoxSelectPokemon.setVisible(true);
-                    msgBoxSelectPokemon
-                            .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxYouWin2.png")));
-
-                    backBtn.setEnabled(false);
-                    attkBtn.setEnabled(false);
-                    waterPokemon.setEnabled(false);
-                    firePokemon.setEnabled(false);
-                    naturePokemon.setEnabled(false);
-
-                } else if (intFight == 2) {
-                    System.out.println("draw!");
-                    msgBoxSelectPokemon.setVisible(true);
-                    msgBoxSelectPokemon
-                            .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxDraw.png")));
-
-                    backBtn.setEnabled(false);
-                    attkBtn.setEnabled(false);
-                    waterPokemon.setEnabled(false);
-                    firePokemon.setEnabled(false);
-                    naturePokemon.setEnabled(false);
-
-                } else if (intFight == 9) {
-
-                    msgBoxSelectPokemon.setVisible(true);
-                    backBtn.setEnabled(false);
-                    attkBtn.setEnabled(false);
-                    waterPokemon.setEnabled(false);
-                    firePokemon.setEnabled(false);
-                    naturePokemon.setEnabled(false);
-
-                }
-
-                yourScore.setText("Score: " + userScore);
-                enemyScore.setText("Score: " + computerScore);
-                // reseting selection
-                userSelectPokemon = new HashMap<>();
-
-            }
-        });
-
-        waterPokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(waterPokemon.getType(), waterPokemon.getFileName(),
-                        waterPokemon.getName());
-                selectPokemon
-                        .setIcon(
-                                new ImageIcon(
-                                        this.getClass().getResource(pokemonPath + waterPokemon.getFileName())));
-
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource("./img/enemyPokemon.png")));
-
-            }
-        });
-
-        firePokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(firePokemon.getType(), firePokemon.getFileName(),
-                        firePokemon.getName());
-                selectPokemon
-                        .setIcon(
-                                new ImageIcon(this.getClass().getResource(pokemonPath + firePokemon.getFileName())));
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource("./img/enemyPokemon.png")));
-
-            }
-        });
-
-        naturePokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(naturePokemon.getType(), naturePokemon.getFileName(),
-                        naturePokemon.getName());
-                selectPokemon
-                        .setIcon(new ImageIcon(
-                                this.getClass().getResource(pokemonPath + naturePokemon.getFileName())));
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource("./img/enemyPokemon.png")));
-
-            }
-        });
-
-        continueBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                msgBoxSelectPokemon.setVisible(false);
-                msgBoxSelectPokemon
-                        .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxSelectPokemon3.png")));
-
-                backBtn.setEnabled(true);
-                attkBtn.setEnabled(true);
-                waterPokemon.setEnabled(true);
-                firePokemon.setEnabled(true);
-                naturePokemon.setEnabled(true);
-            }
-        });
-        // adding objects
         myFrame.add(mainContent);
-        // msgbox
-        mainContent.add(msgBoxSelectPokemon);
-        msgBoxSelectPokemon.add(continueBtn);
-        // components
-        mainContent.add(backBtn);
-        mainContent.add(enemyScore);
-        mainContent.add(enemyLabel);
-        mainContent.add(enemyPokemon);
-        mainContent.add(vsLabel);
-        mainContent.add(selectPokemon);
-        mainContent.add(youLabel);
-        mainContent.add(waterPokemon);
-        mainContent.add(naturePokemon);
-        mainContent.add(firePokemon);
-        mainContent.add(yourScore);
-        mainContent.add(attkBtn);
+        mainContent.add(initBtn);
 
     }
 
@@ -235,21 +92,118 @@ public class myMain {
         mainContent.add(beginBtn);
     }
 
-    void firstFrame() {
-        initLabels mainContent = new initLabels(0, 0, myFrame.frameWidth, myFrame.frameHeight, "loadingBg.jpg");
+    void thirdFrame() {
+        // clearing existing content
+        clearFrame();
+        // main content
+        ImageIcon mainBg = new ImageIcon();
+        JLabel mainContent = new JLabel(mainBg);
+        mainContent.setSize(myFrame.frameWidth, myFrame.frameHeight);
+        mainContent.setOpaque(true);
+        mainContent.setBackground(new Color(0, 0, 0));
+        // msgBoxSelectPokemon.setVisible(false);
+        msgboxToggle(false, "msgBoxSelectPokemon3.png");
+        userSelectPokemon = new HashMap<>();
 
-        myFrame.myFrame();
+        // adding objects
+        myFrame.add(mainContent);
+        // msgbox
+        mainContent.add(msgBoxSelectPokemon);
+        msgBoxSelectPokemon.add(continueBtn);
+        // components
+        mainContent.add(enemyStarRound);
+        mainContent.add(yourStarRound);
+        mainContent.add(backBtn);
+        mainContent.add(enemyScore);
+        mainContent.add(enemyLabel);
+        mainContent.add(enemyPokemon);
+        mainContent.add(vsLabel);
+        mainContent.add(selectPokemon);
+        mainContent.add(youLabel);
+        mainContent.add(waterPokemon);
+        mainContent.add(naturePokemon);
+        mainContent.add(firePokemon);
+        mainContent.add(yourScore);
+        mainContent.add(attkBtn);
 
-        initBtn initBtn = new initBtn(130, 650, 160, 52, "startGameBtn.png");
-        initBtn.addActionListener(new ActionListener() {
+    }
+
+    void btnEvents() {
+        backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 secondFrame();
             }
         });
-        myFrame.add(mainContent);
-        mainContent.add(initBtn);
+        attkBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String computerPokemon = pokemonLogics.pokemonLogics().get(pokemonLogics.randomNumber(3)).get("type");
+                int intFight = pokemonLogics.pokemonFighting(userSelectPokemon.get("type"), computerPokemon);
+                HashMap<String, String> computerPokemonHashMap = pokemonLogics.computerPick(computerPokemon);
+                enemyPokemon.setIcon(new ImageIcon(
+                        this.getClass().getResource(pokemonPath + computerPokemonHashMap.get("fileName"))));
 
+                theBattle(intFight);
+                enemyStarRound.setIcon(new ImageIcon(
+                        this.getClass().getResource(src + computerRoundStar + "star.png")));
+                yourStarRound.setIcon(new ImageIcon(
+                        this.getClass().getResource(src + userRoundStar + "star.png")));
+                yourScore.setText("Score: " + userScore);
+                enemyScore.setText("Score: " + computerScore);
+                // reseting selection
+                userSelectPokemon = new HashMap<>();
+
+            }
+        });
+
+        waterPokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(waterPokemon.getType(), waterPokemon.getFileName(),
+                        waterPokemon.getName());
+                selectPokemon
+                        .setIcon(
+                                new ImageIcon(
+                                        this.getClass().getResource(pokemonPath + waterPokemon.getFileName())));
+
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+
+            }
+        });
+
+        firePokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(firePokemon.getType(), firePokemon.getFileName(),
+                        firePokemon.getName());
+                selectPokemon
+                        .setIcon(
+                                new ImageIcon(this.getClass().getResource(pokemonPath + firePokemon.getFileName())));
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+
+            }
+        });
+
+        naturePokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(naturePokemon.getType(), naturePokemon.getFileName(),
+                        naturePokemon.getName());
+                selectPokemon
+                        .setIcon(new ImageIcon(
+                                this.getClass().getResource(pokemonPath + naturePokemon.getFileName())));
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+
+            }
+        });
+
+        continueBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                msgboxToggle(false, "msgBoxSelectPokemon3.png");
+            }
+        });
     }
 
     void clearFrame() {
@@ -257,4 +211,53 @@ public class myMain {
         myFrame.revalidate();
         myFrame.repaint();
     }
+
+    void msgboxToggle(Boolean Bool, String fileName) {
+        msgBoxSelectPokemon.setVisible(Bool);
+        msgBoxSelectPokemon
+                .setIcon(new ImageIcon(this.getClass().getResource(src + fileName)));
+        backBtn.setEnabled(!Bool);
+        attkBtn.setEnabled(!Bool);
+        waterPokemon.setEnabled(!Bool);
+        firePokemon.setEnabled(!Bool);
+        naturePokemon.setEnabled(!Bool);
+
+    }
+
+    void theBattle(Integer res) {
+        // intFight
+        if (res == 0) {
+            computerRoundStar = computerRoundStar + 1;
+            if (computerRoundStar == 3) {
+                computerScore = computerScore + 1;
+                computerRoundStar = 0;
+                userRoundStar = 0;
+            }
+
+            msgboxToggle(true, "msgBoxYouLose.png");
+            return;
+        }
+        if (res == 1) {
+            // userScore = userScore + 1;
+            userRoundStar = userRoundStar + 1;
+            if (userRoundStar == 3) {
+                userScore = userScore + 1;
+                computerRoundStar = 0;
+                userRoundStar = 0;
+            }
+
+            msgboxToggle(true, "msgBoxYouWin2.png");
+            return;
+        }
+        if (res == 2) {
+
+            msgboxToggle(true, "msgBoxDraw.png");
+            return;
+        }
+
+        msgboxToggle(true, "msgBoxSelectPokemon3.png");
+        return;
+
+    }
+
 }

@@ -28,12 +28,31 @@ public class pokemonLogics {
 
     public HashMap<String, ArrayList<HashMap<String, String>>> pokemonList() {
         // fire pokemon
+        // https://docs.google.com/spreadsheets/d/1-H0jSCkrJHQvZ-molqqFeYcc2VWl5lHzKmVohOvkqBg/edit#gid=0
         ArrayList<HashMap<String, String>> fire = new ArrayList<>();
         Map<String, String> fireIndex = new HashMap<>();
         fireIndex.put("type", "fire");
         fireIndex.put("fileName", "f-1.png");
         fireIndex.put("name", "Flareon");
         fire.add((HashMap<String, String>) fireIndex);
+
+        Map<String, String> fireIndex2 = new HashMap<>();
+        fireIndex2.put("type", "fire");
+        fireIndex2.put("fileName", "f-2.png");
+        fireIndex2.put("name", "Salamander");
+        fire.add((HashMap<String, String>) fireIndex2);
+
+        Map<String, String> fireIndex3 = new HashMap<>();
+        fireIndex3.put("type", "fire");
+        fireIndex3.put("fileName", "f-3.png");
+        fireIndex3.put("name", "Firy");
+        fire.add((HashMap<String, String>) fireIndex3);
+
+        Map<String, String> fireIndex4 = new HashMap<>();
+        fireIndex4.put("type", "fire");
+        fireIndex4.put("fileName", "f-4.png");
+        fireIndex4.put("name", "Fwirle");
+        fire.add((HashMap<String, String>) fireIndex4);
 
         // water pokemon
         ArrayList<HashMap<String, String>> water = new ArrayList<>();
@@ -42,6 +61,24 @@ public class pokemonLogics {
         waterIndex.put("fileName", "w-1.png");
         waterIndex.put("name", "Vaporeon");
         water.add((HashMap<String, String>) waterIndex);
+
+        Map<String, String> waterIndex2 = new HashMap<>();
+        waterIndex2.put("type", "water");
+        waterIndex2.put("fileName", "w-2.png");
+        waterIndex2.put("name", "Squirtle");
+        water.add((HashMap<String, String>) waterIndex2);
+
+        Map<String, String> waterIndex3 = new HashMap<>();
+        waterIndex3.put("type", "water");
+        waterIndex3.put("fileName", "w-3.png");
+        waterIndex3.put("name", "Snaky");
+        water.add((HashMap<String, String>) waterIndex3);
+
+        Map<String, String> waterIndex4 = new HashMap<>();
+        waterIndex4.put("type", "water");
+        waterIndex4.put("fileName", "w-4.png");
+        waterIndex4.put("name", "Siorsy");
+        water.add((HashMap<String, String>) waterIndex4);
 
         // nature pokemon
         ArrayList<HashMap<String, String>> nature = new ArrayList<>();
@@ -56,6 +93,24 @@ public class pokemonLogics {
         natureIndex2.put("fileName", "n-2.png");
         natureIndex2.put("name", "Blawhi");
         nature.add((HashMap<String, String>) natureIndex2);
+
+        Map<String, String> natureIndex3 = new HashMap<>();
+        natureIndex3.put("type", "nature");
+        natureIndex3.put("fileName", "n-3.png");
+        natureIndex3.put("name", "n3");
+        nature.add((HashMap<String, String>) natureIndex3);
+
+        Map<String, String> natureIndex4 = new HashMap<>();
+        natureIndex4.put("type", "nature");
+        natureIndex4.put("fileName", "n-4.png");
+        natureIndex4.put("name", "n4");
+        nature.add((HashMap<String, String>) natureIndex4);
+
+        Map<String, String> natureIndex5 = new HashMap<>();
+        natureIndex5.put("type", "nature");
+        natureIndex5.put("fileName", "n-5.png");
+        natureIndex5.put("name", "n5");
+        nature.add((HashMap<String, String>) natureIndex5);
 
         // final hashmap
         HashMap<String, ArrayList<HashMap<String, String>>> fHashMap = new HashMap<>();
