@@ -1,6 +1,5 @@
 package components;
 
-import java.awt.*;
 import javax.swing.*;
 
 public class initLabels extends JLabel {

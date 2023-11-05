@@ -34,6 +34,11 @@ public class myMain {
         mainContent.setOpaque(true);
         mainContent.setBackground(new Color(0, 0, 0));
 
+        // custom msgbox
+        initLabels msgBoxSelectPokemon = new initLabels(0, 0, 428, 926, "msgBoxSelectPokemon3.png");
+        initBtn continueBtn = new initBtn(110, 430, 204, 70, "continueBtn.png");
+
+        msgBoxSelectPokemon.setVisible(false);
         // btns
         initBtn backBtn = new initBtn(15, 15, 54, 52, "backBtn.png");
         backBtn.addActionListener(new ActionListener() {
@@ -81,21 +86,49 @@ public class myMain {
                 if (intFight == 0) {
                     computerScore = computerScore + 1;
                     System.out.println("you Lose!");
-                    JOptionPane.showMessageDialog(null, "Lose!", "Message",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    msgBoxSelectPokemon.setVisible(true);
+                    msgBoxSelectPokemon
+                            .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxYouLose.png")));
+
+                    backBtn.setEnabled(false);
+                    attkBtn.setEnabled(false);
+                    waterPokemon.setEnabled(false);
+                    firePokemon.setEnabled(false);
+                    naturePokemon.setEnabled(false);
+
                 } else if (intFight == 1) {
                     userScore = userScore + 1;
-                    System.out.println("you Win!");
-                    JOptionPane.showMessageDialog(null, "You Win!", "Message",
-                            JOptionPane.INFORMATION_MESSAGE);
+
+                    msgBoxSelectPokemon.setVisible(true);
+                    msgBoxSelectPokemon
+                            .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxYouWin2.png")));
+
+                    backBtn.setEnabled(false);
+                    attkBtn.setEnabled(false);
+                    waterPokemon.setEnabled(false);
+                    firePokemon.setEnabled(false);
+                    naturePokemon.setEnabled(false);
+
                 } else if (intFight == 2) {
                     System.out.println("draw!");
-                    JOptionPane.showMessageDialog(null, "Draw!", "Message",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    msgBoxSelectPokemon.setVisible(true);
+                    msgBoxSelectPokemon
+                            .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxDraw.png")));
+
+                    backBtn.setEnabled(false);
+                    attkBtn.setEnabled(false);
+                    waterPokemon.setEnabled(false);
+                    firePokemon.setEnabled(false);
+                    naturePokemon.setEnabled(false);
 
                 } else if (intFight == 9) {
-                    JOptionPane.showMessageDialog(null, "Select pokemon first", "Message",
-                            JOptionPane.INFORMATION_MESSAGE);
+
+                    msgBoxSelectPokemon.setVisible(true);
+                    backBtn.setEnabled(false);
+                    attkBtn.setEnabled(false);
+                    waterPokemon.setEnabled(false);
+                    firePokemon.setEnabled(false);
+                    naturePokemon.setEnabled(false);
 
                 }
 
@@ -148,8 +181,27 @@ public class myMain {
             }
         });
 
+        continueBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                msgBoxSelectPokemon.setVisible(false);
+                msgBoxSelectPokemon
+                        .setIcon(new ImageIcon(this.getClass().getResource("./img/msgBoxSelectPokemon3.png")));
+
+                backBtn.setEnabled(true);
+                attkBtn.setEnabled(true);
+                waterPokemon.setEnabled(true);
+                firePokemon.setEnabled(true);
+                naturePokemon.setEnabled(true);
+            }
+        });
         // adding objects
         myFrame.add(mainContent);
+        // msgbox
+        mainContent.add(msgBoxSelectPokemon);
+        msgBoxSelectPokemon.add(continueBtn);
+        // components
         mainContent.add(backBtn);
         mainContent.add(enemyScore);
         mainContent.add(enemyLabel);
