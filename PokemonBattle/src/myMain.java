@@ -49,6 +49,7 @@ public class myMain {
 
     pokemonBtn waterPokemon2 = new pokemonBtn(waterPokemonList.get(1).get("fileName"), 50, 790,
             waterPokemonList.get(0).get("type"), 1, waterPokemonList.get(0).get("name"));
+
     // fire pokemon
     pokemonBtn firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName"), 160, 700,
             firePokemonList.get(0).get("type"), 0,
@@ -64,15 +65,13 @@ public class myMain {
     pokemonBtn naturePokemon2 = new pokemonBtn(naturePokemonList.get(2).get("fileName"), 270, 790,
             naturePokemonList.get(0).get("type"), 2, naturePokemonList.get(0).get("name"));
 
+    Integer pokemon1Unlock = 1;
+    Integer pokemon2Unlock = 2;
+    Integer pokemon3Unlock = 3;
+
     myMain() {
         firstFrame();
         btnEvents();
-    }
-
-    void unlockPokemon() {
-        waterPokemon2.setVisible(userScore > 3);
-        firePokemon2.setVisible(userScore > 9);
-        naturePokemon2.setVisible(userScore > 14);
     }
 
     void firstFrame() {
@@ -124,6 +123,9 @@ public class myMain {
         msgboxToggle(false, "msgBoxSelectPokemon3.png");
         userSelectPokemon = new HashMap<>();
 
+        naturePokemon2.setVisible(false);
+        firePokemon2.setVisible(false);
+        waterPokemon2.setVisible(false);
         unlockPokemon();
 
         // adding objects
@@ -326,4 +328,21 @@ public class myMain {
 
     }
 
+    void unlockPokemon() {
+        if (waterPokemon2.isVisible() == false && userScore >= pokemon1Unlock) {
+            waterPokemon2.setVisible(true);
+            msgboxToggle(true, "msgBoxPokemonUnlock.png");
+        }
+
+        if (firePokemon2.isVisible() == false && userScore >= pokemon2Unlock) {
+            firePokemon2.setVisible(true);
+            msgboxToggle(true, "msgBoxPokemonUnlock.png");
+        }
+
+        if (naturePokemon2.isVisible() == false && userScore >= pokemon3Unlock) {
+            naturePokemon2.setVisible(true);
+            msgboxToggle(true, "msgBoxPokemonUnlock.png");
+        }
+
+    }
 }
