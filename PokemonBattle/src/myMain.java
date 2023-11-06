@@ -65,9 +65,9 @@ public class myMain {
     pokemonBtn naturePokemon2 = new pokemonBtn(naturePokemonList.get(2).get("fileName"), 270, 790,
             naturePokemonList.get(0).get("type"), 2, naturePokemonList.get(0).get("name"));
 
-    Integer pokemon1Unlock = 1;
-    Integer pokemon2Unlock = 2;
-    Integer pokemon3Unlock = 3;
+    Integer pokemon1Unlock = 3;
+    Integer pokemon2Unlock = 6;
+    Integer pokemon3Unlock = 9;
 
     myMain() {
         firstFrame();
@@ -342,6 +342,12 @@ public class myMain {
         if (naturePokemon2.isVisible() == false && userScore >= pokemon3Unlock) {
             naturePokemon2.setVisible(true);
             msgboxToggle(true, "msgBoxPokemonUnlock.png");
+
+            userScore = 0;
+            computerScore = 0;
+
+            userRoundStar = 0;
+            computerRoundStar = 0;
         }
 
     }
