@@ -23,6 +23,15 @@ public class pokemonLogics {
         HashMap<String, String> nature = new HashMap<>();
         nature.put("type", "nature");
         listOfArr.add(nature);
+
+        HashMap<String, String> electric = new HashMap<>();
+        electric.put("type", "electric");
+        listOfArr.add(electric);
+
+        HashMap<String, String> wind = new HashMap<>();
+        wind.put("type", "wind");
+        listOfArr.add(wind);
+
         return listOfArr;
     }
 
@@ -112,12 +121,42 @@ public class pokemonLogics {
         natureIndex5.put("name", "n5");
         nature.add((HashMap<String, String>) natureIndex5);
 
+        // electric pokemon
+        ArrayList<HashMap<String, String>> electric = new ArrayList<>();
+        Map<String, String> electricIndex = new HashMap<>();
+        electricIndex.put("type", "electric");
+        electricIndex.put("fileName", "e-1.png");
+        electricIndex.put("name", "pikachu");
+        electric.add((HashMap<String, String>) electricIndex);
+
+        Map<String, String> electricIndex2 = new HashMap<>();
+        electricIndex2.put("type", "electric");
+        electricIndex2.put("fileName", "e-2.png");
+        electricIndex2.put("name", "Pawmi");
+        electric.add((HashMap<String, String>) electricIndex2);
+
+        // wind pokemon
+
+        ArrayList<HashMap<String, String>> wind = new ArrayList<>();
+        Map<String, String> windIndex1 = new HashMap<>();
+        windIndex1.put("type", "wind");
+        windIndex1.put("fileName", "wi-1.png");
+        windIndex1.put("name", "Pidgeot");
+        wind.add((HashMap<String, String>) windIndex1);
+
+        Map<String, String> windIndex2 = new HashMap<>();
+        windIndex2.put("type", "wind");
+        windIndex2.put("fileName", "wi-2.png");
+        windIndex2.put("name", "noivern");
+        wind.add((HashMap<String, String>) windIndex2);
+
         // final hashmap
         HashMap<String, ArrayList<HashMap<String, String>>> fHashMap = new HashMap<>();
         fHashMap.put("fire", fire);
         fHashMap.put("water", water);
         fHashMap.put("nature", nature);
-
+        fHashMap.put("electric", electric);
+        fHashMap.put("wind", wind);
         return fHashMap;
     }
 
@@ -138,36 +177,84 @@ public class pokemonLogics {
     public int pokemonFighting(String userSelect, String computer) {
         // logic
         // https://docs.google.com/spreadsheets/d/1DaU3NjJgt3ZD0y417fKNhUfMWEjrWy6aecw9_tvSMbI/edit#gid=0
-        // user select fire
+
         if (userSelect == "fire" && computer == "water") {
             return 0;
         }
         if (userSelect == "fire" && computer == "nature") {
             return 1;
         }
+        if (userSelect == "fire" && computer == "electric") {
+            return 0;
+        }
+        if (userSelect == "fire" && computer == "wind") {
+            return 1;
+        }
         if (userSelect == "fire" && computer == "fire") {
             return 2;
         }
 
-        // user select water
         if (userSelect == "water" && computer == "fire") {
             return 1;
         }
         if (userSelect == "water" && computer == "nature") {
             return 0;
         }
+        if (userSelect == "water" && computer == "electric") {
+            return 1;
+        }
+        if (userSelect == "water" && computer == "wind") {
+            return 0;
+        }
         if (userSelect == "water" && computer == "water") {
             return 2;
         }
 
-        // user select nature
         if (userSelect == "nature" && computer == "fire") {
             return 0;
         }
         if (userSelect == "nature" && computer == "water") {
             return 1;
         }
+        if (userSelect == "nature" && computer == "electric") {
+            return 0;
+        }
+        if (userSelect == "nature" && computer == "wind") {
+            return 1;
+        }
         if (userSelect == "nature" && computer == "nature") {
+            return 2;
+        }
+
+        if (userSelect == "electric" && computer == "fire") {
+            return 1;
+        }
+        if (userSelect == "electric" && computer == "water") {
+            return 0;
+        }
+        if (userSelect == "electric" && computer == "nature") {
+            return 1;
+        }
+        if (userSelect == "electric" && computer == "wind") {
+            return 0;
+        }
+        if (userSelect == "electric" && computer == "electric") {
+            return 2;
+        }
+
+        if (userSelect == "wind" && computer == "fire") {
+            return 1;
+        }
+        if (userSelect == "wind" && computer == "water") {
+            return 0;
+        }
+        if (userSelect == "wind" && computer == "nature") {
+            return 0;
+        }
+        if (userSelect == "wind" && computer == "electric") {
+            return 1;
+        }
+        if (userSelect == "wind" && computer == "wind") {
             return 2;
         }
 
