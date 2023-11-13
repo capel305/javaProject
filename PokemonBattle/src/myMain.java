@@ -63,15 +63,15 @@ public class myMain {
             firePokemonList.get(0).get("type"), 0,
             firePokemonList.get(0).get("name"));
 
-    pokemonBtn electricPokemon = new pokemonBtn(electricPokemonList.get(1).get("fileName"), 160, 530,
-            electricPokemonList.get(0).get("type"), 1,
+    pokemonBtn electricPokemon = new pokemonBtn(electricPokemonList.get(0).get("fileName"), 160, 530,
+            electricPokemonList.get(0).get("type"), 0,
             electricPokemonList.get(0).get("name"));
     // nature pokemon
     pokemonBtn naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName"), 270, 440,
             naturePokemonList.get(0).get("type"), 0, naturePokemonList.get(0).get("name"));
 
-    pokemonBtn naturePokemon2 = new pokemonBtn(naturePokemonList.get(2).get("fileName"), 270, 530,
-            naturePokemonList.get(0).get("type"), 2, naturePokemonList.get(0).get("name"));
+    pokemonBtn naturePokemon2 = new pokemonBtn(naturePokemonList.get(1).get("fileName"), 270, 530,
+            naturePokemonList.get(1).get("type"), 1, naturePokemonList.get(1).get("name"));
 
     Integer pokemon1Unlock = 3;
     Integer pokemon2Unlock = 6;

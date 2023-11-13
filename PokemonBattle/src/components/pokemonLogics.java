@@ -135,6 +135,23 @@ public class pokemonLogics {
         electricIndex2.put("name", "Pawmi");
         electric.add((HashMap<String, String>) electricIndex2);
 
+        Map<String, String> electricIndex3 = new HashMap<>();
+        electricIndex3.put("type", "electric");
+        electricIndex3.put("fileName", "e-3.png");
+        electricIndex3.put("name", "e3");
+        electric.add((HashMap<String, String>) electricIndex3);
+
+        Map<String, String> electricIndex4 = new HashMap<>();
+        electricIndex4.put("type", "electric");
+        electricIndex4.put("fileName", "e-4.png");
+        electricIndex4.put("name", "e4");
+        electric.add((HashMap<String, String>) electricIndex4);
+
+        Map<String, String> electricIndex5 = new HashMap<>();
+        electricIndex5.put("type", "electric");
+        electricIndex5.put("fileName", "e-5.png");
+        electricIndex5.put("name", "e5");
+        electric.add((HashMap<String, String>) electricIndex5);
         // wind pokemon
 
         ArrayList<HashMap<String, String>> wind = new ArrayList<>();
@@ -149,6 +166,24 @@ public class pokemonLogics {
         windIndex2.put("fileName", "wi-2.png");
         windIndex2.put("name", "noivern");
         wind.add((HashMap<String, String>) windIndex2);
+
+        Map<String, String> windIndex3 = new HashMap<>();
+        windIndex3.put("type", "wind");
+        windIndex3.put("fileName", "wi-3.png");
+        windIndex3.put("name", "wi3");
+        wind.add((HashMap<String, String>) windIndex3);
+
+        Map<String, String> windIndex4 = new HashMap<>();
+        windIndex4.put("type", "wind");
+        windIndex4.put("fileName", "wi-4.png");
+        windIndex4.put("name", "wi4");
+        wind.add((HashMap<String, String>) windIndex4);
+
+        Map<String, String> windIndex5 = new HashMap<>();
+        windIndex5.put("type", "wind");
+        windIndex5.put("fileName", "wi-5.png");
+        windIndex5.put("name", "wi5");
+        wind.add((HashMap<String, String>) windIndex5);
 
         // final hashmap
         HashMap<String, ArrayList<HashMap<String, String>>> fHashMap = new HashMap<>();
