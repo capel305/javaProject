@@ -22,21 +22,24 @@ public class myMain {
     Integer userScore = 0;
     Integer computerScore = 0;
     // round score
-    Integer userRoundStar = 0;
-    Integer computerRoundStar = 0;
+    Integer userRoundStar = 2;
+    Integer computerRoundStar = 2;
 
     // game labels
     initLabels msgBoxSelectPokemon = new initLabels(0, 0, 428, 926, "msgBoxSelectPokemon3.png");
 
-    scoreLabel yourScore = new scoreLabel(150, 525, 180, 100, "Score: " + userScore);
-    initLabels selectPokemon = new initLabels(150, 360, 95, 85, "selectPokemon.png");
-    initLabels enemyPokemon = new initLabels(150, 180, 95, 85, "enemyPokemon.png");
+    initLabels selectPokemon = new initLabels(50, 120, 95, 85, "selectPokemon.png");
+    initLabels youLabel = new initLabels(10, 210, 180, 53, "youLabel.png");
+    scoreLabel yourScore = new scoreLabel(150, 260, 180, 100, "Score: " + userScore);
+
+    initLabels enemyPokemon = new initLabels(260, 120, 95, 85, "enemyPokemon.png");
+    initLabels enemyLabel = new initLabels(220, 210, 180, 53, "enemyLabel.png");
     scoreLabel enemyScore = new scoreLabel(150, 0, 180, 100, "Score: " + computerScore);
-    initLabels enemyLabel = new initLabels(110, 70, 180, 53, "enemyLabel.png");
-    scoreLabel vsLabel = new scoreLabel(180, 260, 180, 100, "VS");
-    initLabels youLabel = new initLabels(110, 460, 180, 53, "youLabel.png");
-    initLabels enemyStarRound = new initLabels(138, 130, 128, 32, computerRoundStar + "star.png");
-    initLabels yourStarRound = new initLabels(138, 520, 128, 32, userRoundStar + "star.png");
+
+    scoreLabel vsLabel = new scoreLabel(185, 130, 180, 100, "VS");
+
+    initLabels enemyStarRound = new initLabels(260, 265, 128, 32, computerRoundStar + "star.png");
+    initLabels yourStarRound = new initLabels(50, 265, 128, 32, userRoundStar + "star.png");
 
     // game button
     // selecting pokemon section
@@ -44,25 +47,25 @@ public class myMain {
     attkBtn attkBtn = new attkBtn();
     initBtn continueBtn = new initBtn(110, 430, 204, 70, "continueBtn.png");
     // water pokemon
-    pokemonBtn waterPokemon = new pokemonBtn(waterPokemonList.get(0).get("fileName"), 50, 700,
+    pokemonBtn waterPokemon = new pokemonBtn(waterPokemonList.get(0).get("fileName"), 50, 440,
             waterPokemonList.get(0).get("type"), 0, waterPokemonList.get(0).get("name"));
 
-    pokemonBtn waterPokemon2 = new pokemonBtn(waterPokemonList.get(1).get("fileName"), 50, 790,
+    pokemonBtn waterPokemon2 = new pokemonBtn(waterPokemonList.get(1).get("fileName"), 50, 530,
             waterPokemonList.get(0).get("type"), 1, waterPokemonList.get(0).get("name"));
 
     // fire pokemon
-    pokemonBtn firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName"), 160, 700,
+    pokemonBtn firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName"), 160, 440,
             firePokemonList.get(0).get("type"), 0,
             firePokemonList.get(0).get("name"));
 
-    pokemonBtn firePokemon2 = new pokemonBtn(firePokemonList.get(1).get("fileName"), 160, 790,
+    pokemonBtn firePokemon2 = new pokemonBtn(firePokemonList.get(1).get("fileName"), 160, 530,
             firePokemonList.get(0).get("type"), 1,
             firePokemonList.get(0).get("name"));
     // nature pokemon
-    pokemonBtn naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName"), 270, 700,
+    pokemonBtn naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName"), 270, 440,
             naturePokemonList.get(0).get("type"), 0, naturePokemonList.get(0).get("name"));
 
-    pokemonBtn naturePokemon2 = new pokemonBtn(naturePokemonList.get(2).get("fileName"), 270, 790,
+    pokemonBtn naturePokemon2 = new pokemonBtn(naturePokemonList.get(2).get("fileName"), 270, 530,
             naturePokemonList.get(0).get("type"), 2, naturePokemonList.get(0).get("name"));
 
     Integer pokemon1Unlock = 3;
@@ -79,7 +82,7 @@ public class myMain {
 
         myFrame.myFrame();
 
-        initBtn initBtn = new initBtn(130, 650, 160, 52, "startGameBtn.png");
+        initBtn initBtn = new initBtn(130, 560, 160, 52, "startGameBtn.png");
         initBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,7 +102,7 @@ public class myMain {
         // init background
         initLabels mainContent = new initLabels(0, 0, myFrame.frameWidth, myFrame.frameHeight, "frame2bg.jpg");
         // btn
-        initBtn beginBtn = new initBtn(130, 690, 160, 52, "beginBtn.png");
+        initBtn beginBtn = new initBtn(130, 560, 160, 52, "beginBtn.png");
         beginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,10 +126,10 @@ public class myMain {
         msgboxToggle(false, "msgBoxSelectPokemon3.png");
         userSelectPokemon = new HashMap<>();
 
-        naturePokemon2.setVisible(false);
-        firePokemon2.setVisible(false);
-        waterPokemon2.setVisible(false);
-        unlockPokemon();
+        // naturePokemon2.setVisible(false);
+        // firePokemon2.setVisible(false);
+        // waterPokemon2.setVisible(false);
+        // unlockPokemon();
 
         // adding objects
         myFrame.add(mainContent);

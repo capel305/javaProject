@@ -4,7 +4,7 @@ import components.initBtn;
 
 public class myFrame extends JFrame {
     Integer frameWidth = 428;
-    Integer frameHeight = 926;
+    Integer frameHeight = 707;
     String reSource = initBtn.srcPath;
 
     void myFrame() {

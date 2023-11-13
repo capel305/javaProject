@@ -10,7 +10,7 @@ public class attkBtn extends JButton {
         super();
         // ImageIcon icon = new ImageIcon(this.getClass().getResource(srcPath));
         // this.setIcon(icon);
-        this.setBounds(150, 604, 80, 80);
+        this.setBounds(160, 340, 80, 80);
         this.setOpaque(false); // Make the button transparent
         this.setContentAreaFilled(false); // Remove default content fill
         this.setBorderPainted(false); // Remove the border
