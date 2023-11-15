@@ -9,4 +9,5 @@ public class initLabels extends JLabel {
         this.setIcon(new ImageIcon(this.getClass().getResource(src + fileName)));
         this.setBounds(x, y, width, height);
     }
+
 }

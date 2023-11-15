@@ -13,6 +13,7 @@ public class myMain {
 
     pokemonLogics pokemonLogics = new pokemonLogics();
     HashMap<String, ArrayList<HashMap<String, String>>> pokemonList = pokemonLogics.pokemonList();
+
     ArrayList<HashMap<String, String>> waterPokemonList = pokemonLogics.pokemonList().get("water");
     ArrayList<HashMap<String, String>> firePokemonList = pokemonLogics.pokemonList().get("fire");
     ArrayList<HashMap<String, String>> naturePokemonList = pokemonLogics.pokemonList().get("nature");
@@ -44,8 +45,8 @@ public class myMain {
     initLabels enemyStarRound = new initLabels(260, 265, 128, 32, computerRoundStar + "star.png");
     initLabels yourStarRound = new initLabels(50, 265, 128, 32, userRoundStar + "star.png");
 
-    initLabels yourWinner = new initLabels(28, 100, 120, 42, "winner.png");
-    initLabels enemyWinner = new initLabels(239, 100, 120, 42, "winner.png");
+    initLabels yourWinner = new initLabels(28, 80, 120, 42, "winner.png");
+    initLabels enemyWinner = new initLabels(239, 80, 120, 42, "winner.png");
     // game button
     // selecting pokemon section
     initBtn backBtn = new initBtn(15, 15, 54, 52, "backBtn.png");
@@ -77,9 +78,100 @@ public class myMain {
     Integer pokemon2Unlock = 6;
     Integer pokemon3Unlock = 9;
 
+    Integer waterPokemonEvolve = 3;
+    Boolean isWaterPokemonEvolve = false;
+
+    Integer windPokemonEvolve = 5;
+    Boolean isWindPokemonEvolve = false;
+
+    Integer firePokemonEvolve = 7;
+    Boolean isfirePokemonEvolve = false;
+
+    Integer electricPokemonEvolve = 9;
+    Boolean isElectricPokemonEvolve = false;
+
+    Integer naturePokemonEvolve = 9;
+    Boolean isNaturePokemonEvolve = false;
+
     myMain() {
         firstFrame();
         btnEvents();
+    }
+
+    HashMap<String, String> pokemonEvolveInit() {
+        if (isWaterPokemonEvolve == false) {
+            isWaterPokemonEvolve = true;
+            waterPokemon = new pokemonBtn(waterPokemonList.get(0).get("fileName2"), 50, 440,
+                    waterPokemonList.get(0).get("type2"), 0, waterPokemonList.get(0).get("name2"));
+            waterPokemonBtnEvent();
+            return waterPokemonList.get(0);
+        }
+        if (isWindPokemonEvolve == false) {
+            isWindPokemonEvolve = true;
+            windPokemon = new pokemonBtn(windPokemonList.get(0).get("fileName2"), 50, 530,
+                    windPokemonList.get(0).get("type2"), 0, windPokemonList.get(0).get("name2"));
+            windPokemonBtnEvent();
+            return windPokemonList.get(0);
+        }
+        if (isfirePokemonEvolve == false) {
+            isfirePokemonEvolve = true;
+            firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName2"), 160, 440,
+                    firePokemonList.get(0).get("type2"), 0,
+                    firePokemonList.get(0).get("name2"));
+            firePokemonBtnEvent();
+            return firePokemonList.get(0);
+        }
+
+        if (isElectricPokemonEvolve == false) {
+            isElectricPokemonEvolve = true;
+            electricPokemon = new pokemonBtn(electricPokemonList.get(0).get("fileName2"), 160, 530,
+                    electricPokemonList.get(0).get("type2"), 0,
+                    electricPokemonList.get(0).get("name2"));
+            electricPokemonBtnEvent();
+            return electricPokemonList.get(0);
+        }
+
+        if (isNaturePokemonEvolve == false) {
+            isNaturePokemonEvolve = true;
+            naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName2"), 270, 440,
+                    naturePokemonList.get(0).get("type2"), 0, naturePokemonList.get(0).get("name2"));
+            naturePokemonBtnEvents();
+            return naturePokemonList.get(0);
+        }
+        return waterPokemonList.get(0);
+    }
+
+    void pokemonEvolveFrame() {
+        clearFrame();
+        // main content
+        ImageIcon mainBg = new ImageIcon();
+        JLabel mainContent = new JLabel(mainBg);
+        mainContent.setSize(myFrame.frameWidth, myFrame.frameHeight);
+        mainContent.setOpaque(true);
+        mainContent.setBackground(new Color(0, 0, 0));
+
+        HashMap<String, String> pokemonObj = pokemonEvolveInit();
+        initLabels pokemonEvolveTxt = new initLabels(40, 81, 322, 81, "pokemonEvolveTxt.png");
+        initLabels arrowRight = new initLabels(160, 250, 66, 78, "arrowRight.png");
+
+        initPokemonLabels pokemonFrom = new initPokemonLabels(40, 250, 80, 80, pokemonObj.get("fileName"));
+        initPokemonLabels pokemonTo = new initPokemonLabels(260, 250, 80, 80, pokemonObj.get("fileName2"));
+
+        initBtn continueBtn = new initBtn(120, 400, 160, 55, "confirmBtn.png");
+        continueBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thirdFrame();
+            }
+        });
+        // adding contents
+        myFrame.add(mainContent);
+        mainContent.add(continueBtn);
+        mainContent.add(pokemonEvolveTxt);
+        mainContent.add(pokemonFrom);
+        mainContent.add(pokemonTo);
+        mainContent.add(arrowRight);
+
     }
 
     void firstFrame() {
@@ -144,7 +236,18 @@ public class myMain {
         // msgbox
         mainContent.add(msgBoxSelectPokemon);
         msgBoxSelectPokemon.add(continueBtn);
+
+        JButton testBtn = new JButton("Test Evolve");
+        testBtn.setBounds(300, 5, 100, 50);
+        testBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pokemonEvolveFrame();
+            }
+        });
+
         // components
+        mainContent.add(testBtn);
         mainContent.add(yourWinner);
         mainContent.add(enemyWinner);
         mainContent.add(enemyStarRound);
@@ -180,8 +283,11 @@ public class myMain {
 
                 String computerPokemon = pokemonLogics.pokemonLogics()
                         .get(pokemonLogics.randomNumber(pokemonLogics.pokemonLogics().size())).get("type");
-                int intFight = pokemonLogics.pokemonFighting(userSelectPokemon.get("type"), computerPokemon);
+
                 HashMap<String, String> computerPokemonHashMap = pokemonLogics.computerPick(computerPokemon);
+                int intFight = pokemonLogics.pokemonFighting(userSelectPokemon.get("type"),
+                        computerPokemonHashMap.get("type"));
+
                 enemyPokemon.setIcon(new ImageIcon(
                         this.getClass().getResource(pokemonPath + computerPokemonHashMap.get("fileName"))));
 
@@ -198,88 +304,11 @@ public class myMain {
 
             }
         });
-
-        waterPokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(waterPokemon.getType(), waterPokemon.getFileName(),
-                        waterPokemon.getName());
-                selectPokemon
-                        .setIcon(
-                                new ImageIcon(
-                                        this.getClass().getResource(pokemonPath + waterPokemon.getFileName())));
-
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
-
-                yourWinner.setVisible(false);
-                enemyWinner.setVisible(false);
-
-            }
-        });
-
-        windPokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(windPokemon.getType(), windPokemon.getFileName(),
-                        windPokemon.getName());
-                selectPokemon
-                        .setIcon(
-                                new ImageIcon(
-                                        this.getClass().getResource(pokemonPath + windPokemon.getFileName())));
-
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
-                yourWinner.setVisible(false);
-                enemyWinner.setVisible(false);
-
-            }
-        });
-
-        firePokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(firePokemon.getType(), firePokemon.getFileName(),
-                        firePokemon.getName());
-                selectPokemon
-                        .setIcon(
-                                new ImageIcon(this.getClass().getResource(pokemonPath + firePokemon.getFileName())));
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
-                yourWinner.setVisible(false);
-                enemyWinner.setVisible(false);
-
-            }
-        });
-
-        electricPokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(electricPokemon.getType(), electricPokemon.getFileName(),
-                        electricPokemon.getName());
-                selectPokemon
-                        .setIcon(
-                                new ImageIcon(
-                                        this.getClass().getResource(pokemonPath + electricPokemon.getFileName())));
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
-                yourWinner.setVisible(false);
-                enemyWinner.setVisible(false);
-
-            }
-        });
-
-        naturePokemon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userSelectPokemon = pokemonLogics.userSelect(naturePokemon.getType(), naturePokemon.getFileName(),
-                        naturePokemon.getName());
-                selectPokemon
-                        .setIcon(new ImageIcon(
-                                this.getClass().getResource(pokemonPath + naturePokemon.getFileName())));
-                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
-                yourWinner.setVisible(false);
-                enemyWinner.setVisible(false);
-
-            }
-        });
-
+        waterPokemonBtnEvent();
+        windPokemonBtnEvent();
+        firePokemonBtnEvent();
+        electricPokemonBtnEvent();
+        naturePokemonBtnEvents();
         naturePokemon2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -303,6 +332,7 @@ public class myMain {
         });
     }
 
+    // misc meathods
     void clearFrame() {
         myFrame.getContentPane().removeAll();
         myFrame.revalidate();
@@ -383,4 +413,96 @@ public class myMain {
         }
 
     }
+
+    void waterPokemonBtnEvent() {
+        waterPokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(waterPokemon.getType(), waterPokemon.getFileName(),
+                        waterPokemon.getName());
+                selectPokemon
+                        .setIcon(
+                                new ImageIcon(
+                                        this.getClass().getResource(pokemonPath + waterPokemon.getFileName())));
+
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+
+                yourWinner.setVisible(false);
+                enemyWinner.setVisible(false);
+
+            }
+        });
+    }
+
+    void windPokemonBtnEvent() {
+        windPokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(windPokemon.getType(), windPokemon.getFileName(),
+                        windPokemon.getName());
+                selectPokemon
+                        .setIcon(
+                                new ImageIcon(
+                                        this.getClass().getResource(pokemonPath + windPokemon.getFileName())));
+
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+                yourWinner.setVisible(false);
+                enemyWinner.setVisible(false);
+
+            }
+        });
+    }
+
+    void firePokemonBtnEvent() {
+        firePokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(firePokemon.getType(), firePokemon.getFileName(),
+                        firePokemon.getName());
+                selectPokemon
+                        .setIcon(
+                                new ImageIcon(this.getClass().getResource(pokemonPath + firePokemon.getFileName())));
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+                yourWinner.setVisible(false);
+                enemyWinner.setVisible(false);
+
+            }
+        });
+    }
+
+    void electricPokemonBtnEvent() {
+        electricPokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(electricPokemon.getType(), electricPokemon.getFileName(),
+                        electricPokemon.getName());
+                selectPokemon
+                        .setIcon(
+                                new ImageIcon(
+                                        this.getClass().getResource(pokemonPath + electricPokemon.getFileName())));
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+                yourWinner.setVisible(false);
+                enemyWinner.setVisible(false);
+
+            }
+        });
+    }
+
+    void naturePokemonBtnEvents() {
+        naturePokemon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userSelectPokemon = pokemonLogics.userSelect(naturePokemon.getType(), naturePokemon.getFileName(),
+                        naturePokemon.getName());
+                selectPokemon
+                        .setIcon(new ImageIcon(
+                                this.getClass().getResource(pokemonPath + naturePokemon.getFileName())));
+                enemyPokemon.setIcon(new ImageIcon(this.getClass().getResource(src + "enemyPokemon.png")));
+                yourWinner.setVisible(false);
+                enemyWinner.setVisible(false);
+
+            }
+        });
+    }
+
 }
