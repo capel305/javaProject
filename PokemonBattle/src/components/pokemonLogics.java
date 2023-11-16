@@ -261,7 +261,6 @@ public class pokemonLogics {
     public int pokemonFighting(String userSelect, String computer) {
         // logic
         // https://docs.google.com/spreadsheets/d/1DaU3NjJgt3ZD0y417fKNhUfMWEjrWy6aecw9_tvSMbI/edit#gid=0
-
         // water
         // water
         if (userSelect == "water" && computer == "water") {
@@ -573,6 +572,7 @@ public class pokemonLogics {
         if (userSelect == "wind2" && computer == "wind2") {
             return 1;
         }
+
         return 9;
     }
 

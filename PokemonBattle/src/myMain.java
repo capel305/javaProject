@@ -76,7 +76,7 @@ public class myMain {
 
     Integer pokemon1Unlock = 3;
     Integer pokemon2Unlock = 6;
-    Integer pokemon3Unlock = 9;
+    Integer pokemon3Unlock = 15;
 
     Integer waterPokemonEvolve = 3;
     Boolean isWaterPokemonEvolve = false;
@@ -90,88 +90,12 @@ public class myMain {
     Integer electricPokemonEvolve = 9;
     Boolean isElectricPokemonEvolve = false;
 
-    Integer naturePokemonEvolve = 9;
+    Integer naturePokemonEvolve = 12;
     Boolean isNaturePokemonEvolve = false;
 
     myMain() {
         firstFrame();
         btnEvents();
-    }
-
-    HashMap<String, String> pokemonEvolveInit() {
-        if (isWaterPokemonEvolve == false) {
-            isWaterPokemonEvolve = true;
-            waterPokemon = new pokemonBtn(waterPokemonList.get(0).get("fileName2"), 50, 440,
-                    waterPokemonList.get(0).get("type2"), 0, waterPokemonList.get(0).get("name2"));
-            waterPokemonBtnEvent();
-            return waterPokemonList.get(0);
-        }
-        if (isWindPokemonEvolve == false) {
-            isWindPokemonEvolve = true;
-            windPokemon = new pokemonBtn(windPokemonList.get(0).get("fileName2"), 50, 530,
-                    windPokemonList.get(0).get("type2"), 0, windPokemonList.get(0).get("name2"));
-            windPokemonBtnEvent();
-            return windPokemonList.get(0);
-        }
-        if (isfirePokemonEvolve == false) {
-            isfirePokemonEvolve = true;
-            firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName2"), 160, 440,
-                    firePokemonList.get(0).get("type2"), 0,
-                    firePokemonList.get(0).get("name2"));
-            firePokemonBtnEvent();
-            return firePokemonList.get(0);
-        }
-
-        if (isElectricPokemonEvolve == false) {
-            isElectricPokemonEvolve = true;
-            electricPokemon = new pokemonBtn(electricPokemonList.get(0).get("fileName2"), 160, 530,
-                    electricPokemonList.get(0).get("type2"), 0,
-                    electricPokemonList.get(0).get("name2"));
-            electricPokemonBtnEvent();
-            return electricPokemonList.get(0);
-        }
-
-        if (isNaturePokemonEvolve == false) {
-            isNaturePokemonEvolve = true;
-            naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName2"), 270, 440,
-                    naturePokemonList.get(0).get("type2"), 0, naturePokemonList.get(0).get("name2"));
-            naturePokemonBtnEvents();
-            return naturePokemonList.get(0);
-        }
-        return waterPokemonList.get(0);
-    }
-
-    void pokemonEvolveFrame() {
-        clearFrame();
-        // main content
-        ImageIcon mainBg = new ImageIcon();
-        JLabel mainContent = new JLabel(mainBg);
-        mainContent.setSize(myFrame.frameWidth, myFrame.frameHeight);
-        mainContent.setOpaque(true);
-        mainContent.setBackground(new Color(0, 0, 0));
-
-        HashMap<String, String> pokemonObj = pokemonEvolveInit();
-        initLabels pokemonEvolveTxt = new initLabels(40, 81, 322, 81, "pokemonEvolveTxt.png");
-        initLabels arrowRight = new initLabels(160, 250, 66, 78, "arrowRight.png");
-
-        initPokemonLabels pokemonFrom = new initPokemonLabels(40, 250, 80, 80, pokemonObj.get("fileName"));
-        initPokemonLabels pokemonTo = new initPokemonLabels(260, 250, 80, 80, pokemonObj.get("fileName2"));
-
-        initBtn continueBtn = new initBtn(120, 400, 160, 55, "confirmBtn.png");
-        continueBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                thirdFrame();
-            }
-        });
-        // adding contents
-        myFrame.add(mainContent);
-        mainContent.add(continueBtn);
-        mainContent.add(pokemonEvolveTxt);
-        mainContent.add(pokemonFrom);
-        mainContent.add(pokemonTo);
-        mainContent.add(arrowRight);
-
     }
 
     void firstFrame() {
@@ -237,17 +161,7 @@ public class myMain {
         mainContent.add(msgBoxSelectPokemon);
         msgBoxSelectPokemon.add(continueBtn);
 
-        JButton testBtn = new JButton("Test Evolve");
-        testBtn.setBounds(300, 5, 100, 50);
-        testBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pokemonEvolveFrame();
-            }
-        });
-
         // components
-        mainContent.add(testBtn);
         mainContent.add(yourWinner);
         mainContent.add(enemyWinner);
         mainContent.add(enemyStarRound);
@@ -301,6 +215,7 @@ public class myMain {
                 // reseting selection
                 userSelectPokemon = new HashMap<>();
                 unlockPokemon();
+                pokemonEvolve();
 
             }
         });
@@ -505,4 +420,103 @@ public class myMain {
         });
     }
 
+    // pokemon evolve
+    void pokemonEvolveFrame() {
+        clearFrame();
+        // main content
+        ImageIcon mainBg = new ImageIcon();
+        JLabel mainContent = new JLabel(mainBg);
+        mainContent.setSize(myFrame.frameWidth, myFrame.frameHeight);
+        mainContent.setOpaque(true);
+        mainContent.setBackground(new Color(0, 0, 0));
+
+        HashMap<String, String> pokemonObj = pokemonEvolveInit();
+        initLabels pokemonEvolveTxt = new initLabels(40, 81, 322, 81, "pokemonEvolveTxt.png");
+        initLabels arrowRight = new initLabels(160, 250, 66, 78, "arrowRight.png");
+
+        initLabels pokemonFrom = new initLabels(40, 250, 80, 80, "pokemon/" + pokemonObj.get("fileName"));
+        initLabels pokemonTo = new initLabels(260, 250, 80, 80, "pokemon/" + pokemonObj.get("fileName2"));
+
+        initBtn continueBtn = new initBtn(120, 400, 160, 55, "confirmBtn.png");
+        continueBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thirdFrame();
+            }
+        });
+        // adding contents
+        myFrame.add(mainContent);
+        mainContent.add(continueBtn);
+        mainContent.add(pokemonEvolveTxt);
+        mainContent.add(pokemonFrom);
+        mainContent.add(pokemonTo);
+        mainContent.add(arrowRight);
+
+    }
+
+    HashMap<String, String> pokemonEvolveInit() {
+        if (isWaterPokemonEvolve == false) {
+            isWaterPokemonEvolve = true;
+            waterPokemon = new pokemonBtn(waterPokemonList.get(0).get("fileName2"), 50, 440,
+                    waterPokemonList.get(0).get("type2"), 0, waterPokemonList.get(0).get("name2"));
+            waterPokemonBtnEvent();
+            return waterPokemonList.get(0);
+        }
+        if (isWindPokemonEvolve == false) {
+            isWindPokemonEvolve = true;
+            windPokemon = new pokemonBtn(windPokemonList.get(0).get("fileName2"), 50, 530,
+                    windPokemonList.get(0).get("type2"), 0, windPokemonList.get(0).get("name2"));
+            windPokemonBtnEvent();
+            return windPokemonList.get(0);
+        }
+        if (isfirePokemonEvolve == false) {
+            isfirePokemonEvolve = true;
+            firePokemon = new pokemonBtn(firePokemonList.get(0).get("fileName2"), 160, 440,
+                    firePokemonList.get(0).get("type2"), 0,
+                    firePokemonList.get(0).get("name2"));
+            firePokemonBtnEvent();
+            return firePokemonList.get(0);
+        }
+
+        if (isElectricPokemonEvolve == false) {
+            isElectricPokemonEvolve = true;
+            electricPokemon = new pokemonBtn(electricPokemonList.get(0).get("fileName2"), 160, 530,
+                    electricPokemonList.get(0).get("type2"), 0,
+                    electricPokemonList.get(0).get("name2"));
+            electricPokemonBtnEvent();
+            return electricPokemonList.get(0);
+        }
+
+        if (isNaturePokemonEvolve == false) {
+            isNaturePokemonEvolve = true;
+            naturePokemon = new pokemonBtn(naturePokemonList.get(0).get("fileName2"), 270, 440,
+                    naturePokemonList.get(0).get("type2"), 0, naturePokemonList.get(0).get("name2"));
+            naturePokemonBtnEvents();
+            return naturePokemonList.get(0);
+        }
+        return waterPokemonList.get(0);
+    }
+
+    void pokemonEvolve() {
+        if (userScore == waterPokemonEvolve && isWaterPokemonEvolve == false) {
+            pokemonEvolveFrame();
+            return;
+        }
+        if (userScore == windPokemonEvolve && isWindPokemonEvolve == false) {
+            pokemonEvolveFrame();
+            return;
+        }
+        if (userScore == firePokemonEvolve && isfirePokemonEvolve == false) {
+            pokemonEvolveFrame();
+            return;
+        }
+        if (userScore == electricPokemonEvolve && isElectricPokemonEvolve == false) {
+            pokemonEvolveFrame();
+            return;
+        }
+        if (userScore == naturePokemonEvolve && isNaturePokemonEvolve == false) {
+            pokemonEvolveFrame();
+            return;
+        }
+    }
 }
